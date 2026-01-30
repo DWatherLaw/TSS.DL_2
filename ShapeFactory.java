@@ -17,7 +17,7 @@ public class ShapeFactory {
    public ShapeFactory(int shape_type) {
       switch(shape_type / 10) {
       case 1:
-         this.shape = createStar(3, new Point(0, 0), (double)this.width / 2.0D, (double)this.width / 2.0D);
+         this.shape = createStar(6, new Point(0, 0), (double)this.width / 2.0D, (double)this.width / 2.0D);
          break;
       case 2:
       case 4:
