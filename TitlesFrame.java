@@ -7,6 +7,9 @@ public class TitlesFrame extends JFrame {
       this.initUI();
    }
 
+/**
+ * Створює головне вікно програми.
+ */
    private void initUI() {
       this.setTitle("Кривые фигуры");
       this.setDefaultCloseOperation(3);
@@ -15,6 +18,9 @@ public class TitlesFrame extends JFrame {
       this.setLocationRelativeTo((Component)null);
    }
 
+/**
+ * Запускає програму. Це головний метод.
+ */
    public static void main(String[] args) {
       SwingUtilities.invokeLater(new Runnable() {
          public void run() {

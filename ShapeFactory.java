@@ -7,6 +7,10 @@ import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D.Double;
 
+/**
+ * Створює фігуру за заданим числовим кодом.
+ */
+
 public class ShapeFactory {
    public Shape shape;
    public BasicStroke stroke = new BasicStroke(3.0F);
@@ -66,6 +70,10 @@ public class ShapeFactory {
       }
 
    }
+
+/**
+ * Допоміжний метод, що створює багатокутник.
+ */
 
    private static Shape createStar(int arms, Point center, double rOuter, double rInner) {
       double angle = 3.141592653589793D / (double)arms;

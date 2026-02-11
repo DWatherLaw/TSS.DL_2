@@ -29,7 +29,9 @@ public class TitlesPanel extends JPanel implements ActionListener {
       }
 
    }
-
+/**
+ * Відповідає за логіку малювання фігур.
+ */
    private void doDrawing(Graphics g) {
       this.is_done = false;
       this.g2d = (Graphics2D)g;
@@ -60,6 +62,11 @@ public class TitlesPanel extends JPanel implements ActionListener {
 
       this.is_done = true;
    }
+
+
+   /**
+ * Метод викликається, щоб намалювати все на екрані.
+ */
 
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
