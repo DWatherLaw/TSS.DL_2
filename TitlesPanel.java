@@ -14,24 +14,38 @@ public class TitlesPanel extends JPanel implements ActionListener {
    private Timer animation;
    private boolean is_done = true;
    private int start_angle = 0;
-   private int shape;
+   private ShapeFactory factory; // Замінив 'int shape' на 'ShapeFactory factory'
 
+   /**
+    * Конструктор для зворотної сумісності.
+    */
    public TitlesPanel(int _shape) {
-      this.shape = _shape;
+      this.factory = new ShapeFactory(_shape);
       this.animation = new Timer(50, this);
       this.animation.setInitialDelay(50);
       this.animation.start();
+   }
+
+   /**
+    * Новий, покращений конструктор.
+    * @param factory готовий об'єкт фабрики.
+    */
+   public TitlesPanel(ShapeFactory factory) {
+       this.factory = factory;
+       this.animation = new Timer(50, this);
+       this.animation.setInitialDelay(50);
+       this.animation.start();
    }
 
    public void actionPerformed(ActionEvent arg0) {
       if (this.is_done) {
          this.repaint();
       }
-
    }
-/**
- * Відповідає за логіку малювання фігур.
- */
+   
+   /**
+    * Відповідає за логіку малювання фігур.
+    */
    private void doDrawing(Graphics g) {
       this.is_done = false;
       this.g2d = (Graphics2D)g;
@@ -40,16 +54,16 @@ public class TitlesPanel extends JPanel implements ActionListener {
       Insets insets = this.getInsets();
       int w = size.width - insets.left - insets.right;
       int h = size.height - insets.top - insets.bottom;
-      ShapeFactory shape = new ShapeFactory(this.shape);
+      
+      ShapeFactory shape = this.factory;
+
       this.g2d.setStroke(shape.stroke);
       this.g2d.setPaint(shape.paint);
       double angle = (double)(this.start_angle++);
       if (this.start_angle > 360) {
          this.start_angle = 0;
       }
-
       double dr = 90.0D / ((double)w / ((double)shape.width * 1.5D));
-
       for(int j = shape.height; j < h; j = (int)((double)j + (double)shape.height * 1.5D)) {
          for(int i = shape.width; i < w; i = (int)((double)i + (double)shape.width * 1.5D)) {
             angle = angle > 360.0D ? 0.0D : angle + dr;
@@ -59,15 +73,12 @@ public class TitlesPanel extends JPanel implements ActionListener {
             this.g2d.draw(transform.createTransformedShape(shape.shape));
          }
       }
-
       this.is_done = true;
    }
 
-
    /**
- * Метод викликається, щоб намалювати все на екрані.
- */
-
+    * Метод щоб намалювати все на екрані.
+    */
    public void paintComponent(Graphics g) {
       super.paintComponent(g);
       this.doDrawing(g);
